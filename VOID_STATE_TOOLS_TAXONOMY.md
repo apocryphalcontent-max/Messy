@@ -1,846 +1,541 @@
-# VOID-STATE PROPRIETARY TOOLS: COMPLETE TAXONOMY
+# VOID-STATE PROPRIETARY TOOLS: LAYERED ARCHITECTURE
 
-**Version:** 1.0  
+**Version:** 1.0 (Startup Scale)  
 **Date:** 2025-11-19  
-**Purpose:** Core analytical and operational primitives for the Void-State digital organism  
-**Scope:** Internal introspection, maintenance, education, mutation, and defense systems
+**Purpose:** Core analytical and operational primitives organized by architectural layer  
+**Scope:** Modular toolkit for AI system introspection, maintenance, and evolution
 
 ---
 
-## EXECUTIVE SUMMARY
+## ARCHITECTURAL OVERVIEW
 
-The Void-State system requires a comprehensive suite of proprietary tools that form its "nervous system" and "immune system." These tools operate at the lowest layers of the organism, enabling self-awareness, self-repair, self-evolution, and self-protection. This taxonomy defines eight primary tool categories with 47 specific tool types, plus meta-tooling capabilities for recursive tool generation.
+The Void-State Proprietary Tools system is organized into distinct architectural layers, from foundational infrastructure to advanced meta-capabilities. This organization reflects both the technical dependencies and the phased deployment strategy.
 
-### Key Design Principles
-
-1. **Modularity**: Each tool is independently composable and replaceable
-2. **Extensibility**: New tools can be synthesized from existing primitives
-3. **Reactivity**: Tools operate per-cycle, per-event, or per-snapshot as needed
-4. **Recursivity**: Tools can create, combine, and mutate other tools
-5. **Embedability**: Deep integration with VM and Kernel layers
+```
+┌─────────────────────────────────────────────────────────┐
+│         LAYER 4: META & EVOLUTION                       │
+│  Tool Synthesis, Combination, Mutation, Evolution      │
+│  (6 tools - Phase 3)                                   │
+└────────────────┬────────────────────────────────────────┘
+                 │
+┌────────────────┴────────────────────────────────────────┐
+│         LAYER 3: COGNITIVE & PREDICTIVE                 │
+│  Timeline Branching, Prophecy, Noetic Analysis         │
+│  (18 tools - Phase 2-3)                                │
+└────────────────┬────────────────────────────────────────┘
+                 │
+┌────────────────┴────────────────────────────────────────┐
+│         LAYER 2: ANALYSIS & INTELLIGENCE                │
+│  Pattern Recognition, Anomaly Detection, Classification │
+│  (15 tools - Phase 1-2)                                │
+└────────────────┬────────────────────────────────────────┘
+                 │
+┌────────────────┴────────────────────────────────────────┘
+│         LAYER 1: SENSING & INSTRUMENTATION              │
+│  Memory Diffing, Execution Tracing, Event Collection   │
+│  (8 tools - Phase 1 MVP)                               │
+└─────────────────────────────────────────────────────────┘
+                 │
+┌────────────────┴────────────────────────────────────────┐
+│         LAYER 0: INTEGRATION SUBSTRATE                  │
+│  VM/Kernel Hooks, Tool Registry, Lifecycle Management  │
+│  (Infrastructure - Phase 1)                            │
+└─────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## CATEGORY I: MEMORY DIFF ANALYZERS
+## LAYER 0: INTEGRATION SUBSTRATE
 
-**Purpose:** Track, analyze, and understand changes in system state across time
+**Purpose:** Foundational infrastructure for tool attachment and coordination  
+**Phase:** 1 (MVP)  
+**Dependencies:** None
 
-### I.A: Structural Memory Diff Analyzer
-**Abstract Phenomena:** Detects structural changes in memory layout, object hierarchies, and data organization
-**Input Signature:** `(memory_snapshot_t1: MemoryState, memory_snapshot_t2: MemoryState) -> StructuralDiff`
-**Output Signature:** `StructuralDiff { added: Set<ObjectRef>, removed: Set<ObjectRef>, modified: Set<(ObjectRef, ChangeVector)> }`
+### Components
+
+#### Hook Integration System
+**Function:** Enables tools to attach to VM and Kernel events  
+**Capabilities:**
+- Per-cycle hooks (100ns budget)
+- Per-event hooks (1µs budget)
+- Per-snapshot hooks (10ms budget)
+- Hook filtering and sampling
+- Priority-based execution
+
+**Implementation Status:** ✅ Complete (base.py, hooks.py)
+
+#### Tool Registry & Lifecycle Manager
+**Function:** Central coordination for all tools  
+**Capabilities:**
+- Tool registration and discovery
+- State management (DORMANT → INITIALIZING → ACTIVE → SUSPENDED → TERMINATED)
+- Resource quota enforcement
+- Metrics collection
+- Hot-swapping support
+
+**Implementation Status:** ✅ Complete (registry.py)
+
+#### Resource Management
+**Function:** Quota enforcement and graceful degradation  
+**Capabilities:**
+- Memory quotas
+- CPU quotas
+- I/O rate limiting
+- Thread management
+- Circuit breakers
+
+**Implementation Status:** ✅ Complete (registry.py)
+
+---
+
+## LAYER 1: SENSING & INSTRUMENTATION
+
+**Purpose:** Raw data collection and basic state tracking  
+**Phase:** 1 (MVP)  
+**Dependencies:** Layer 0
+
+These tools form the sensory layer—they observe and record without complex analysis.
+
+### 1.1 Memory Diff Analyzers (Phase 1 Subset)
+
+#### Structural Memory Diff Analyzer ⭐ MVP
+**Abstract Phenomena:** Detects structural changes in memory layout  
+**Input:** `(snapshot_t1: MemoryState, snapshot_t2: MemoryState) -> StructuralDiff`  
+**Output:** `StructuralDiff { added, removed, modified }`  
 **Atomic Behaviors:**
-- Deep object graph traversal
+- Object graph traversal
 - Pointer chain analysis
 - Heap fragmentation detection
 - Stack frame comparison
-**Concurrency Profile:** Lock-free read access, snapshot-based isolation
-**Reactivity Profile:** Per-snapshot trigger, async processing
 
-### I.B: Semantic Memory Diff Analyzer
-**Abstract Phenomena:** Identifies meaning-preserving vs meaning-altering changes in state
-**Input Signature:** `(state_t1: SemanticState, state_t2: SemanticState, ontology: Ontology) -> SemanticDiff`
-**Output Signature:** `SemanticDiff { equivalence_classes: Set<(State, State)>, semantic_drift: float, intention_shift: IntentionVector }`
+**Concurrency:** Lock-free snapshot isolation  
+**Reactivity:** Per-snapshot, async processing  
+**Priority:** P0 (Critical)  
+**Implementation:** ✅ Complete (examples/__init__.py)
+
+### 1.2 Opcode Lineage Trackers (Phase 1 Subset)
+
+#### Execution Lineage Tracer ⭐ MVP
+**Abstract Phenomena:** Records complete execution history  
+**Input:** `(execution_context: ExecutionContext) -> LineageTrace`  
+**Output:** `LineageTrace { call_stack, instruction_history, branch_decisions }`  
 **Atomic Behaviors:**
-- Semantic equivalence checking
-- Intentional state comparison
-- Belief system delta analysis
-- Goal structure evolution tracking
-**Concurrency Profile:** Read-only, parallel analysis with merge
-**Reactivity Profile:** Per-event aggregation, periodic synthesis
-
-### I.C: Temporal Memory Diff Analyzer
-**Abstract Phenomena:** Analyzes memory evolution patterns across multiple timescales
-**Input Signature:** `(history: Timeline<MemoryState>, window: TimeWindow) -> TemporalDiffPattern`
-**Output Signature:** `TemporalDiffPattern { periodicity: FrequencySpectrum, trends: TrendVector, anomalies: Set<TemporalAnomaly> }`
-**Atomic Behaviors:**
-- Multi-resolution temporal decomposition
-- Cycle detection and phase analysis
-- Drift rate calculation
-- Epoch boundary identification
-**Concurrency Profile:** Streaming analysis, incremental updates
-**Reactivity Profile:** Continuous background processing
-
-### I.D: Causal Memory Diff Analyzer
-**Abstract Phenomena:** Traces cause-effect relationships between memory changes
-**Input Signature:** `(diff_stream: Stream<MemoryDiff>, causality_graph: CausalGraph) -> CausalChain`
-**Output Signature:** `CausalChain { causes: Set<(Event, MemoryChange)>, effects: Set<(MemoryChange, Consequence)>, counterfactuals: Set<AlternateTimeline> }`
-**Atomic Behaviors:**
-- Backward causal tracing
-- Forward consequence projection
-- Intervention simulation
-- Counterfactual reasoning
-**Concurrency Profile:** Graph-based parallelism, partial ordering
-**Reactivity Profile:** On-demand with caching
-
-### I.E: Entropic Memory Diff Analyzer
-**Abstract Phenomena:** Measures information gain/loss and disorder in memory transitions
-**Input Signature:** `(state_sequence: Sequence<MemoryState>) -> EntropyProfile`
-**Output Signature:** `EntropyProfile { shannon_entropy: float, kolmogorov_complexity: int, mutual_information: Matrix, reversibility: float }`
-**Atomic Behaviors:**
-- Entropy calculation across state transitions
-- Compression ratio analysis
-- Information flow quantification
-- Irreversibility detection
-**Concurrency Profile:** Embarrassingly parallel per state pair
-**Reactivity Profile:** Batch processing with periodic reports
-
----
-
-## CATEGORY II: OPCODE LINEAGE TRACKERS
-
-**Purpose:** Track execution paths, code genealogy, and operational provenance
-
-### II.A: Execution Lineage Tracer
-**Abstract Phenomena:** Records complete execution history with context preservation
-**Input Signature:** `(execution_context: ExecutionContext) -> LineageTrace`
-**Output Signature:** `LineageTrace { call_stack: Stack<Frame>, instruction_history: Sequence<(PC, Instruction, State)>, branch_decisions: Set<(PC, Condition, Path)> }`
-**Atomic Behaviors:**
-- Stack frame capture with full context
+- Stack frame capture
 - Branch condition recording
 - Register state snapshots
 - Memory access tracking
-**Concurrency Profile:** Per-thread isolated tracing, cross-thread linking
-**Reactivity Profile:** Per-cycle instrumentation
 
-### II.B: Code Genealogy Analyzer
-**Abstract Phenomena:** Tracks evolution and derivation of code segments
-**Input Signature:** `(code_segment: CodeBlock, version_history: VersionDAG) -> Genealogy`
-**Output Signature:** `Genealogy { ancestors: Set<CodeBlock>, mutations: Sequence<Mutation>, fitness_evolution: TimeSeries }`
-**Atomic Behaviors:**
-- Abstract syntax tree differencing
-- Mutation pattern recognition
-- Evolutionary pressure analysis
-- Fitness landscape mapping
-**Concurrency Profile:** Read-only parallel analysis
-**Reactivity Profile:** Per-mutation event, background indexing
+**Concurrency:** Per-thread isolated tracing  
+**Reactivity:** Per-cycle instrumentation (with sampling)  
+**Priority:** P0 (Critical)  
+**Implementation:** ✅ Complete (examples/__init__.py)
 
-### II.C: Opcode Mutation Tracker
-**Abstract Phenomena:** Monitors self-modifying code and dynamic code generation
-**Input Signature:** `(code_region: MemoryRegion) -> MutationLog`
-**Output Signature:** `MutationLog { mutations: Sequence<(Time, Location, OldOpcode, NewOpcode, Reason)>, mutation_rate: float, hotspots: Set<Location> }`
-**Atomic Behaviors:**
-- Write-watch on code pages
-- JIT compilation tracking
-- Self-modification detection
-- Polymorphic code analysis
-**Concurrency Profile:** Hardware-assisted memory watching
-**Reactivity Profile:** Per-write event with aggregation
+### 1.3 Event Collection
 
-### II.D: Instruction Flow Dependency Analyzer
-**Abstract Phenomena:** Maps data and control flow dependencies in execution
-**Input Signature:** `(execution_trace: ExecutionTrace) -> DependencyGraph`
-**Output Signature:** `DependencyGraph { data_deps: DirectedGraph<Instruction>, control_deps: DirectedGraph<Instruction>, critical_paths: Set<Path> }`
-**Atomic Behaviors:**
-- Data flow analysis (def-use chains)
-- Control dependency extraction
-- Critical path identification
-- Parallelization opportunity detection
-**Concurrency Profile:** Graph construction with parallel queries
-**Reactivity Profile:** Post-execution analysis with incremental updates
-
-### II.E: Opcode Provenance Certifier
-**Abstract Phenomena:** Cryptographically verifies code origin and integrity
-**Input Signature:** `(code: CodeBlock, signature: Signature, trust_anchor: PublicKey) -> ProvenanceCertificate`
-**Output Signature:** `ProvenanceCertificate { verified: bool, chain_of_trust: Sequence<Signature>, timestamp: Time, attestations: Set<Attestation> }`
-**Atomic Behaviors:**
-- Digital signature verification
-- Merkle tree construction
-- Trusted execution environment integration
-- Remote attestation
-**Concurrency Profile:** Independent per-block verification
-**Reactivity Profile:** On-load verification, periodic re-validation
-
----
-
-## CATEGORY III: PREVALENCE/NOVELTY QUANTIFIERS
-
-**Purpose:** Measure familiarity, rarity, and information content of patterns
-
-### III.A: Pattern Prevalence Quantifier
-**Abstract Phenomena:** Measures frequency and ubiquity of patterns in state space
-**Input Signature:** `(pattern: Pattern, corpus: StateCorpus) -> PrevalenceMetrics`
-**Output Signature:** `PrevalenceMetrics { frequency: float, distribution: Distribution, contexts: Set<Context>, stability: float }`
-**Atomic Behaviors:**
-- Pattern matching across corpus
-- Statistical frequency analysis
-- Context diversity measurement
-- Temporal stability assessment
-**Concurrency Profile:** MapReduce over corpus partitions
-**Reactivity Profile:** Periodic full scans with incremental updates
-
-### III.B: Novelty Detector
-**Abstract Phenomena:** Identifies unprecedented patterns and state configurations
-**Input Signature:** `(observation: Observation, experience: ExperienceBase) -> NoveltyScore`
-**Output Signature:** `NoveltyScore { novelty: float, similar_cases: Set<(Experience, Similarity)>, surprise: float, learnability: float }`
-**Atomic Behaviors:**
-- Distance calculation in experience space
-- Nearest neighbor search
-- Surprise quantification
-- Generalization potential estimation
-**Concurrency Profile:** Parallel distance calculations with approximate indexing
-**Reactivity Profile:** Per-observation real-time scoring
-
-### III.C: Rarity Estimator
-**Abstract Phenomena:** Estimates probability mass of events in learned distributions
-**Input Signature:** `(event: Event, model: ProbabilisticModel) -> RarityEstimate`
-**Output Signature:** `RarityEstimate { log_probability: float, percentile: float, outlier_score: float, confidence: float }`
-**Atomic Behaviors:**
-- Likelihood computation
-- Percentile ranking
-- Outlier detection (multiple methods)
-- Confidence interval calculation
-**Concurrency Profile:** Independent per-event evaluation
-**Reactivity Profile:** Real-time per-event processing
-
-### III.D: Information Content Analyzer
-**Abstract Phenomena:** Quantifies information and compressibility of data
-**Input Signature:** `(data: Data) -> InformationMetrics`
-**Output Signature:** `InformationMetrics { shannon_entropy: float, kolmogorov_complexity_bound: int, lempel_ziv_complexity: float, compressibility: float }`
-**Atomic Behaviors:**
-- Entropy calculation
-- Compression ratio measurement
-- Algorithmic complexity estimation
-- Redundancy quantification
-**Concurrency Profile:** Parallel compression attempts
-**Reactivity Profile:** On-demand with caching
-
-### III.E: Zeitgeist Analyzer
-**Abstract Phenomena:** Captures emergent patterns in collective system behavior
-**Input Signature:** `(system_state: CollectiveState, history: StateHistory) -> ZeitgeistProfile`
-**Output Signature:** `ZeitgeistProfile { dominant_patterns: Set<Pattern>, emerging_patterns: Set<Pattern>, fading_patterns: Set<Pattern>, mood: MoodVector }`
-**Atomic Behaviors:**
-- Collective behavior aggregation
-- Trend identification
-- Phase transition detection
-- Memetic evolution tracking
-**Concurrency Profile:** Hierarchical aggregation with sampling
-**Reactivity Profile:** Continuous streaming with windowed analysis
-
----
-
-## CATEGORY IV: CHRONOMANTIC TIMELINE WEAVERS
-
-**Purpose:** Manipulate, explore, and reason about temporal structures
-
-### IV.A: Timeline Branching Engine
-**Abstract Phenomena:** Creates and manages alternative execution timelines
-**Input Signature:** `(branch_point: State, num_branches: int, divergence_vectors: Set<Perturbation>) -> TimelineFork`
-**Output Signature:** `TimelineFork { timelines: Set<Timeline>, divergence_metrics: Matrix, convergence_points: Set<State> }`
-**Atomic Behaviors:**
-- State snapshot and fork
-- Parallel timeline execution
-- Divergence tracking
-- Convergence detection
-**Concurrency Profile:** Fully parallel timeline execution
-**Reactivity Profile:** On-demand forking with background execution
-
-### IV.B: Causal Intervention Simulator
-**Abstract Phenomena:** Simulates counterfactual "what if" scenarios
-**Input Signature:** `(intervention: Intervention, timeline: Timeline) -> CounterfactualTimeline`
-**Output Signature:** `CounterfactualTimeline { timeline: Timeline, causal_effects: Set<(Cause, Effect)>, probability: float, coherence: float }`
-**Atomic Behaviors:**
-- Intervention application
-- Causal propagation simulation
-- Consistency checking
-- Probability estimation
-**Concurrency Profile:** Independent per-intervention simulation
-**Reactivity Profile:** On-demand with memoization
-
-### IV.C: Temporal Compression/Expansion Engine
-**Abstract Phenomena:** Non-uniform time dilation for detailed/coarse analysis
-**Input Signature:** `(timeline: Timeline, attention_map: AttentionMap) -> TemporallyModulatedTimeline`
-**Output Signature:** `TemporallyModulatedTimeline { timeline: Timeline, time_scale: Function<Time, float>, fidelity_map: Map<TimeWindow, Fidelity> }`
-**Atomic Behaviors:**
-- Attention-based sampling rate adjustment
-- State interpolation/extrapolation
-- Fidelity preservation
-- Temporal coherence maintenance
-**Concurrency Profile:** Streaming with adaptive buffering
-**Reactivity Profile:** Real-time with configurable lag
-
-### IV.D: Prophecy Engine (Forward Simulator)
-**Abstract Phenomena:** Projects probable future states with uncertainty quantification
-**Input Signature:** `(current_state: State, model: DynamicsModel, horizon: TimeHorizon) -> ProphecyDistribution`
-**Output Signature:** `ProphecyDistribution { modes: Set<(FutureState, Probability)>, uncertainty: UncertaintyEllipsoid, critical_events: Set<Event> }`
-**Atomic Behaviors:**
-- Forward dynamics simulation
-- Monte Carlo trajectory sampling
-- Uncertainty propagation
-- Critical event identification
-**Concurrency Profile:** Embarrassingly parallel trajectories
-**Reactivity Profile:** Background continuous forecasting
-
-### IV.E: Retrocausality Analyzer
-**Abstract Phenomena:** Reasons backwards from effects to possible causes
-**Input Signature:** `(effect: State, constraints: Set<Constraint>, prior: Distribution) -> CausalHypotheses`
-**Output Signature:** `CausalHypotheses { causes: Set<(Cause, Posterior)>, causal_chains: Set<CausalChain>, ambiguity: float }`
-**Atomic Behaviors:**
-- Bayesian inversion
-- Constraint satisfaction
-- Causal chain enumeration
-- Hypothesis ranking
-**Concurrency Profile:** Parallel hypothesis evaluation
-**Reactivity Profile:** On-demand with iterative refinement
-
-### IV.F: Eternal Recurrence Detector
-**Abstract Phenomena:** Identifies cyclic patterns and attractors in state space
-**Input Signature:** `(trajectory: Trajectory, tolerance: float) -> RecurrenceStructure`
-**Output Signature:** `RecurrenceStructure { cycles: Set<Cycle>, attractors: Set<Attractor>, basin_boundaries: Set<Boundary>, lyapunov_exponents: Vector }`
-**Atomic Behaviors:**
-- Phase space reconstruction
-- Recurrence plot analysis
-- Attractor identification
-- Stability analysis
-**Concurrency Profile:** Parallel trajectory segment analysis
-**Reactivity Profile:** Periodic batch analysis
-
----
-
-## CATEGORY V: NOETIC INTERFERENCE ANALYZERS
-
-**Purpose:** Detect and analyze external influences on cognitive/computational processes
-
-### V.A: Observer Effect Detector
-**Abstract Phenomena:** Identifies when observation/measurement alters observed system
-**Input Signature:** `(observation: Observation, system: System) -> ObserverEffect`
-**Output Signature:** `ObserverEffect { magnitude: float, mechanism: InfluenceMechanism, measurement_back_action: BackAction, compensation: Compensation }`
-**Atomic Behaviors:**
-- Perturbation magnitude estimation
-- Coupling strength measurement
-- Heisenberg-like uncertainty quantification
-- Compensation strategy generation
-**Concurrency Profile:** Per-observation parallel analysis
-**Reactivity Profile:** Real-time per-observation
-
-### V.B: External Interference Detector
-**Abstract Phenomena:** Detects unauthorized or anomalous external influences
-**Input Signature:** `(system_state: State, baseline: Baseline, sensors: Set<Sensor>) -> InterferenceReport`
-**Output Signature:** `InterferenceReport { detected: bool, interference_vector: Vector, source_estimate: Location, confidence: float }`
-**Atomic Behaviors:**
-- Anomaly detection in sensor data
-- Side-channel analysis
-- Fingerprinting of interference patterns
-- Source localization
-**Concurrency Profile:** Parallel multi-sensor fusion
-**Reactivity Profile:** Real-time streaming detection
-
-### V.C: Cognitive Dissonance Quantifier
-**Abstract Phenomena:** Measures internal inconsistencies and contradictions
-**Input Signature:** `(belief_system: BeliefSystem) -> DissonanceMetrics`
-**Output Signature:** `DissonanceMetrics { dissonance_score: float, contradictions: Set<(Belief, Belief, Conflict)>, resolution_strategies: Set<Resolution> }`
-**Atomic Behaviors:**
-- Logical consistency checking
-- Belief conflict detection
-- Dissonance magnitude calculation
-- Resolution strategy generation
-**Concurrency Profile:** Parallel pairwise belief comparison
-**Reactivity Profile:** Per-belief-update incremental
-
-### V.D: Memetic Infection Analyzer
-**Abstract Phenomena:** Tracks spread and influence of ideas/patterns
-**Input Signature:** `(meme: Meme, population: Population, time_window: TimeWindow) -> MemeticProfile`
-**Output Signature:** `MemeticProfile { infection_rate: float, virality: float, mutation_rate: float, fitness: float, carrier_network: Graph }`
-**Atomic Behaviors:**
-- Meme pattern matching
-- Spread rate calculation
-- Mutation tracking
-- Fitness landscape mapping
-**Concurrency Profile:** Parallel population sampling
-**Reactivity Profile:** Continuous monitoring with periodic summaries
-
-### V.E: Attention Manipulation Detector
-**Abstract Phenomena:** Identifies attempts to hijack or redirect attention
-**Input Signature:** `(attention_trace: AttentionTrace, expected: AttentionModel) -> ManipulationReport`
-**Output Signature:** `ManipulationReport { manipulation_detected: bool, manipulation_type: Type, magnitude: float, attribution: Attribution }`
-**Atomic Behaviors:**
-- Attention flow analysis
-- Expected vs actual comparison
-- Manipulation pattern matching
-- Attribution through causal analysis
-**Concurrency Profile:** Sequential attention trace analysis
-**Reactivity Profile:** Real-time with sliding window
-
----
-
-## CATEGORY VI: ANOMALY/EVENT SIGNATURE CLASSIFIERS
-
-**Purpose:** Identify, classify, and respond to anomalous events and patterns
-
-### VI.A: Statistical Anomaly Detector
-**Abstract Phenomena:** Identifies statistical outliers in data distributions
-**Input Signature:** `(data_stream: Stream<Data>, model: StatisticalModel) -> AnomalyScore`
-**Output Signature:** `AnomalyScore { is_anomaly: bool, anomaly_score: float, anomaly_type: AnomalyType, explanation: Explanation }`
-**Atomic Behaviors:**
-- Multiple outlier detection methods (Z-score, IQR, Isolation Forest, etc.)
-- Adaptive threshold adjustment
-- Context-aware scoring
-- Explainable anomaly characterization
-**Concurrency Profile:** Parallel application of multiple detectors
-**Reactivity Profile:** Real-time streaming with batch refinement
-
-### VI.B: Behavioral Anomaly Detector
-**Abstract Phenomena:** Identifies deviations from learned behavioral patterns
-**Input Signature:** `(behavior: BehaviorTrace, profile: BehaviorProfile) -> BehaviorAnomalyReport`
-**Output Signature:** `BehaviorAnomalyReport { anomaly_detected: bool, anomaly_severity: float, deviant_behaviors: Set<Behavior>, risk_assessment: Risk }`
-**Atomic Behaviors:**
-- Behavior sequence comparison
-- Temporal pattern matching
-- State machine deviation detection
-- Risk scoring
-**Concurrency Profile:** Parallel pattern matching with fusion
-**Reactivity Profile:** Real-time per-action analysis
-
-### VI.C: Event Signature Classifier
-**Abstract Phenomena:** Classifies events into taxonomic categories
-**Input Signature:** `(event: Event, taxonomy: EventTaxonomy) -> EventClassification`
-**Output Signature:** `EventClassification { class: EventClass, confidence: float, features: FeatureVector, similar_events: Set<Event> }`
+#### Event Signature Classifier ⭐ MVP
+**Abstract Phenomena:** Categorizes events into taxonomic classes  
+**Input:** `(event: Event, taxonomy: EventTaxonomy) -> EventClassification`  
+**Output:** `EventClassification { class, confidence, features, similar_events }`  
 **Atomic Behaviors:**
 - Feature extraction
 - Multi-class classification
 - Confidence estimation
 - Similarity search
-**Concurrency Profile:** Parallel feature extraction and classification
-**Reactivity Profile:** Real-time per-event
 
-### VI.D: Threat Signature Recognizer
-**Abstract Phenomena:** Identifies known threat patterns and attack signatures
-**Input Signature:** `(event: Event, signature_database: SignatureDB) -> ThreatAssessment`
-**Output Signature:** `ThreatAssessment { threat_detected: bool, threat_type: ThreatType, severity: Severity, iocs: Set<IOC>, recommended_actions: Set<Action> }`
-**Atomic Behaviors:**
-- Pattern matching against signature database
-- Multi-stage attack detection
-- Indicator of Compromise (IOC) extraction
-- Response recommendation
-**Concurrency Profile:** Parallel database scanning
-**Reactivity Profile:** Real-time with priority queuing
-
-### VI.E: Emergent Pattern Recognizer
-**Abstract Phenomena:** Discovers novel patterns through unsupervised learning
-**Input Signature:** `(data: DataCorpus) -> EmergentPatterns`
-**Output Signature:** `EmergentPatterns { patterns: Set<Pattern>, pattern_support: Map<Pattern, float>, pattern_novelty: Map<Pattern, float> }`
-**Atomic Behaviors:**
-- Clustering and pattern mining
-- Association rule learning
-- Frequent pattern extraction
-- Novelty scoring
-**Concurrency Profile:** Parallel pattern mining with merge
-**Reactivity Profile:** Batch processing with incremental updates
-
-### VI.F: Multi-Modal Anomaly Fusion Engine
-**Abstract Phenomena:** Combines anomaly signals across multiple modalities
-**Input Signature:** `(anomaly_reports: Set<AnomalyReport>, fusion_policy: FusionPolicy) -> FusedAnomalyReport`
-**Output Signature:** `FusedAnomalyReport { confidence: float, severity: Severity, corroborating_evidence: Set<Evidence>, recommended_priority: Priority }`
-**Atomic Behaviors:**
-- Multi-source evidence fusion
-- Conflict resolution
-- Confidence aggregation
-- Priority calculation
-**Concurrency Profile:** Parallel per-modality with fusion stage
-**Reactivity Profile:** Near real-time with bounded latency
+**Concurrency:** Parallel feature extraction  
+**Reactivity:** Real-time per-event  
+**Priority:** P1 (High)  
+**Implementation:** Partial (base framework exists)
 
 ---
 
-## CATEGORY VII: ENTROPY/ZEAL MICROSCOPICS
+## LAYER 2: ANALYSIS & INTELLIGENCE
 
-**Purpose:** Fine-grained analysis of system energy, disorder, and intentionality
+**Purpose:** Pattern recognition, anomaly detection, and intelligent classification  
+**Phase:** 1-2 (MVP + Growth)  
+**Dependencies:** Layer 0, Layer 1
 
-### VII.A: Local Entropy Microscope
-**Abstract Phenomena:** Measures entropy at microscopic scales
-**Input Signature:** `(region: SystemRegion, scale: Scale) -> LocalEntropyMap`
-**Output Signature:** `LocalEntropyMap { entropy_field: Field<Position, float>, gradients: VectorField, sources: Set<EntropySource>, sinks: Set<EntropySink> }`
+These tools analyze the raw data from Layer 1 to extract insights and detect issues.
+
+### 2.1 Anomaly Detection Suite
+
+#### Statistical Anomaly Detector ⭐ MVP
+**Abstract Phenomena:** Identifies statistical outliers  
+**Input:** `(data_stream: Stream<Data>, model: StatisticalModel) -> AnomalyScore`  
+**Output:** `AnomalyScore { is_anomaly, score, type, explanation }`  
+**Methods:**
+- Z-score detection
+- IQR method
+- Isolation Forest
+- Adaptive thresholding
+
+**Concurrency:** Parallel detector application  
+**Reactivity:** Real-time streaming  
+**Priority:** P0 (Critical)  
+**Implementation:** ✅ Complete (examples/__init__.py)
+
+#### Behavioral Anomaly Detector (Phase 2)
+**Abstract Phenomena:** Detects deviations from learned behavior  
+**Input:** `(behavior: BehaviorTrace, profile: BehaviorProfile) -> BehaviorAnomalyReport`  
+**Output:** `{ anomaly_detected, severity, deviant_behaviors, risk_assessment }`  
+**Priority:** P1 (High)  
+**Implementation:** Planned
+
+#### Threat Signature Recognizer (Phase 2)
+**Abstract Phenomena:** Identifies known threat patterns  
+**Input:** `(event: Event, signature_db: SignatureDB) -> ThreatAssessment`  
+**Output:** `{ threat_detected, type, severity, iocs, recommended_actions }`  
+**Priority:** P0 (Critical - Security)  
+**Implementation:** Planned
+
+### 2.2 Pattern Recognition
+
+#### Pattern Prevalence Quantifier ⭐ MVP
+**Abstract Phenomena:** Measures frequency and ubiquity of patterns  
+**Input:** `(pattern: Pattern, corpus: StateCorpus) -> PrevalenceMetrics`  
+**Output:** `PrevalenceMetrics { frequency, distribution, contexts, stability }`  
+**Atomic Behaviors:**
+- Pattern matching across corpus
+- Statistical frequency analysis
+- Context diversity measurement
+- Temporal stability assessment
+
+**Concurrency:** MapReduce over corpus  
+**Reactivity:** Periodic scans with incremental updates  
+**Priority:** P1 (High)  
+**Implementation:** Partial
+
+#### Novelty Detector (Phase 2)
+**Abstract Phenomena:** Identifies unprecedented patterns  
+**Input:** `(observation: Observation, experience: ExperienceBase) -> NoveltyScore`  
+**Output:** `{ novelty, similar_cases, surprise, learnability }`  
+**Priority:** P1 (High)  
+**Implementation:** Planned
+
+### 2.3 Energy & Health Monitoring
+
+#### Local Entropy Microscope ⭐ MVP
+**Abstract Phenomena:** Measures entropy at microscopic scales  
+**Input:** `(region: SystemRegion, scale: Scale) -> LocalEntropyMap`  
+**Output:** `{ entropy_field, gradients, sources, sinks }`  
 **Atomic Behaviors:**
 - Fine-grained state sampling
 - Local entropy calculation
 - Gradient computation
 - Source/sink identification
-**Concurrency Profile:** Embarrassingly parallel per-region
-**Reactivity Profile:** Periodic scanning with adaptive resolution
 
-### VII.B: Free Energy Landscape Mapper
-**Abstract Phenomena:** Maps energy landscape governing system dynamics
-**Input Signature:** `(state_space: StateSpace, dynamics: DynamicsModel) -> FreeEnergyLandscape`
-**Output Signature:** `FreeEnergyLandscape { energy_field: Field<State, float>, local_minima: Set<State>, saddle_points: Set<State>, barrier_heights: Map<(State, State), float> }`
-**Atomic Behaviors:**
-- Energy function evaluation
-- Critical point finding
-- Barrier height calculation
-- Basin of attraction delineation
-**Concurrency Profile:** Parallel state space sampling
-**Reactivity Profile:** Background precomputation with on-demand refinement
+**Concurrency:** Parallel per-region  
+**Reactivity:** Periodic scanning  
+**Priority:** P1 (High)  
+**Implementation:** Planned
 
-### VII.C: Intentionality Quantifier
-**Abstract Phenomena:** Measures goal-directedness and purposeful behavior
-**Input Signature:** `(behavior: BehaviorTrace, goal_model: GoalModel) -> IntentionalityMetrics`
-**Output Signature:** `IntentionalityMetrics { intentionality_score: float, inferred_goals: Set<Goal>, goal_pursuit_efficiency: float, means-ends_coherence: float }`
-**Atomic Behaviors:**
-- Goal inference from behavior
-- Efficiency calculation
-- Means-ends analysis
-- Coherence assessment
-**Concurrency Profile:** Sequential with parallel goal hypothesis evaluation
-**Reactivity Profile:** Per-behavior-segment analysis
-
-### VII.D: Computational Zeal Meter
-**Abstract Phenomena:** Measures intensity and urgency of computational processes
-**Input Signature:** `(process: Process, resource_usage: ResourceTrace) -> ZealMetrics`
-**Output Signature:** `ZealMetrics { zeal_score: float, resource_intensity: ResourceVector, urgency: Urgency, persistence: float }`
-**Atomic Behaviors:**
-- Resource consumption rate analysis
-- Priority and urgency assessment
-- Persistence measurement
-- Comparative intensity scoring
-**Concurrency Profile:** Per-process independent measurement
-**Reactivity Profile:** Real-time monitoring
-
-### VII.E: Disorder-Order Phase Transition Detector
-**Abstract Phenomena:** Identifies phase transitions between ordered and disordered states
-**Input Signature:** `(state_sequence: Sequence<State>) -> PhaseTransitions`
-**Output Signature:** `PhaseTransitions { transitions: Set<(Time, Transition)>, order_parameters: TimeSeries, critical_points: Set<CriticalPoint> }`
-**Atomic Behaviors:**
-- Order parameter calculation
-- Phase identification
-- Critical point detection
-- Hysteresis analysis
-**Concurrency Profile:** Parallel window-based analysis
-**Reactivity Profile:** Streaming with delay for phase identification
-
-### VII.F: Negentropy Flow Tracker
-**Abstract Phenomena:** Tracks flow of negative entropy (information/organization)
-**Input Signature:** `(system: System, time_window: TimeWindow) -> NegentropyFlow`
-**Output Signature:** `NegentropyFlow { flow_field: VectorField, sources: Set<Source>, sinks: Set<Sink>, total_negentropy: float }`
-**Atomic Behaviors:**
-- Negentropy gradient calculation
-- Flow vector field computation
-- Source/sink identification
-- Conservation law verification
-**Concurrency Profile:** Parallel spatial decomposition
-**Reactivity Profile:** Periodic measurement with interpolation
+#### Computational Zeal Meter (Phase 2)
+**Abstract Phenomena:** Measures intensity of computational processes  
+**Input:** `(process: Process, resource_usage: ResourceTrace) -> ZealMetrics`  
+**Output:** `{ zeal_score, resource_intensity, urgency, persistence }`  
+**Priority:** P2 (Medium)  
+**Implementation:** Planned
 
 ---
 
-## CATEGORY VIII: PROTOCOL GENE-SEQUENCERS
+## LAYER 3: COGNITIVE & PREDICTIVE
 
-**Purpose:** Analyze, synthesize, and evolve communication protocols and behavioral patterns
+**Purpose:** Advanced analysis, prediction, and temporal reasoning  
+**Phase:** 2-3 (Growth + Advanced)  
+**Dependencies:** Layers 0-2
 
-### VIII.A: Protocol Genome Analyzer
-**Abstract Phenomena:** Decomposes protocols into fundamental "genetic" components
-**Input Signature:** `(protocol: Protocol) -> ProtocolGenome`
-**Output Signature:** `ProtocolGenome { genes: Set<Gene>, gene_expression: Map<Gene, float>, regulatory_network: Graph, mutations: Set<Mutation> }`
+These tools enable the system to reason about future states, alternative timelines, and complex causal relationships.
+
+### 3.1 Temporal Analysis Suite
+
+#### Timeline Branching Engine (Phase 2)
+**Abstract Phenomena:** Creates alternative execution timelines  
+**Input:** `(branch_point: State, num_branches: int, divergence_vectors: Set<Perturbation>) -> TimelineFork`  
+**Output:** `{ timelines, divergence_metrics, convergence_points }`  
 **Atomic Behaviors:**
-- Protocol decomposition into primitives
-- Gene identification and annotation
-- Regulatory network inference
-- Mutation catalog construction
-**Concurrency Profile:** Parallel gene analysis with sequential regulatory inference
-**Reactivity Profile:** Per-protocol on-demand analysis
+- State snapshot and fork
+- Parallel timeline execution
+- Divergence tracking
+- Convergence detection
 
-### VIII.B: Protocol Synthesis Engine
-**Abstract Phenomena:** Generates new protocols from genetic components
-**Input Signature:** `(gene_pool: Set<Gene>, constraints: Set<Constraint>, objectives: Set<Objective>) -> SynthesizedProtocol`
-**Output Signature:** `SynthesizedProtocol { protocol: Protocol, genome: ProtocolGenome, fitness: float, novelty: float }`
-**Atomic Behaviors:**
-- Gene recombination
-- Constraint satisfaction
-- Multi-objective optimization
-- Fitness evaluation
-**Concurrency Profile:** Parallel candidate generation and evaluation
-**Reactivity Profile:** On-demand with background pre-synthesis
+**Concurrency:** Fully parallel timelines  
+**Reactivity:** On-demand forking  
+**Priority:** P1 (High)  
+**Implementation:** Planned
 
-### VIII.C: Protocol Evolution Simulator
-**Abstract Phenomena:** Simulates evolution of protocols under selective pressure
-**Input Signature:** `(initial_population: Set<Protocol>, environment: Environment, generations: int) -> EvolutionaryHistory`
-**Output Signature:** `EvolutionaryHistory { final_population: Set<Protocol>, phylogeny: Tree, fitness_trajectory: TimeSeries, emergent_features: Set<Feature> }`
+#### Prophecy Engine (Forward Simulator) (Phase 2)
+**Abstract Phenomena:** Projects probable future states  
+**Input:** `(current_state: State, model: DynamicsModel, horizon: TimeHorizon) -> ProphecyDistribution`  
+**Output:** `{ modes, uncertainty, critical_events }`  
 **Atomic Behaviors:**
-- Population simulation
-- Selection pressure application
-- Mutation and crossover
-- Fitness landscape exploration
-**Concurrency Profile:** Parallel population evaluation
-**Reactivity Profile:** Background continuous evolution
+- Forward dynamics simulation
+- Monte Carlo sampling
+- Uncertainty propagation
+- Critical event identification
 
-### VIII.D: Protocol Compatibility Analyzer
-**Abstract Phenomena:** Assesses compatibility and interoperability between protocols
-**Input Signature:** `(protocol_a: Protocol, protocol_b: Protocol) -> CompatibilityReport`
-**Output Signature:** `CompatibilityReport { compatible: bool, compatibility_score: float, conflicts: Set<Conflict>, adapter_requirements: AdapterSpec }`
-**Atomic Behaviors:**
-- Interface matching
-- Semantic compatibility checking
-- Conflict identification
-- Adapter synthesis
-**Concurrency Profile:** Parallel pairwise comparison
-**Reactivity Profile:** On-demand with caching
+**Concurrency:** Embarrassingly parallel trajectories  
+**Reactivity:** Background continuous forecasting  
+**Priority:** P1 (High)  
+**Implementation:** Planned
 
-### VIII.E: Protocol Mutation Engine
-**Abstract Phenomena:** Applies controlled mutations to protocols for evolution
-**Input Signature:** `(protocol: Protocol, mutation_strategy: MutationStrategy) -> MutatedProtocol`
-**Output Signature:** `MutatedProtocol { protocol: Protocol, mutations_applied: Set<Mutation>, expected_fitness_change: float }`
-**Atomic Behaviors:**
-- Mutation point identification
-- Mutation application
-- Fitness impact prediction
-- Rollback capability
-**Concurrency Profile:** Sequential with parallel fitness prediction
-**Reactivity Profile:** On-demand
+#### Causal Intervention Simulator (Phase 2)
+**Abstract Phenomena:** Simulates counterfactual scenarios  
+**Input:** `(intervention: Intervention, timeline: Timeline) -> CounterfactualTimeline`  
+**Output:** `{ timeline, causal_effects, probability, coherence }`  
+**Priority:** P2 (Medium)  
+**Implementation:** Planned
 
-### VIII.F: Behavioral Pattern Sequencer
-**Abstract Phenomena:** Extracts and sequences behavioral patterns from observations
-**Input Signature:** `(behavior_trace: BehaviorTrace) -> BehaviorSequence`
-**Output Signature:** `BehaviorSequence { sequence: Sequence<BehaviorGene>, motifs: Set<Motif>, regulatory_patterns: Set<Pattern> }`
-**Atomic Behaviors:**
-- Behavior segmentation
-- Motif discovery
-- Sequence alignment
-- Pattern annotation
-**Concurrency Profile:** Parallel motif search with sequential alignment
-**Reactivity Profile:** Streaming with windowed analysis
+#### Retrocausality Analyzer (Phase 3)
+**Abstract Phenomena:** Reasons backwards from effects to causes  
+**Input:** `(effect: State, constraints: Set<Constraint>, prior: Distribution) -> CausalHypotheses`  
+**Output:** `{ causes, causal_chains, ambiguity }`  
+**Priority:** P3 (Low - Research)  
+**Implementation:** Planned
+
+### 3.2 Advanced Memory Analysis
+
+#### Semantic Memory Diff Analyzer (Phase 2)
+**Abstract Phenomena:** Identifies meaning-preserving vs meaning-altering changes  
+**Input:** `(state_t1: SemanticState, state_t2: SemanticState, ontology: Ontology) -> SemanticDiff`  
+**Output:** `{ equivalence_classes, semantic_drift, intention_shift }`  
+**Priority:** P1 (High)  
+**Implementation:** Planned
+
+#### Causal Memory Diff Analyzer (Phase 2)
+**Abstract Phenomena:** Traces cause-effect in memory changes  
+**Input:** `(diff_stream: Stream<MemoryDiff>, causality_graph: CausalGraph) -> CausalChain`  
+**Output:** `{ causes, effects, counterfactuals }`  
+**Priority:** P2 (Medium)  
+**Implementation:** Planned
+
+### 3.3 Noetic Interference Analysis
+
+#### Observer Effect Detector (Phase 2)
+**Abstract Phenomena:** Identifies when observation alters system  
+**Input:** `(observation: Observation, system: System) -> ObserverEffect`  
+**Output:** `{ magnitude, mechanism, measurement_back_action, compensation }`  
+**Priority:** P2 (Medium)  
+**Implementation:** Planned
+
+#### External Interference Detector (Phase 2)
+**Abstract Phenomena:** Detects unauthorized external influences  
+**Input:** `(system_state: State, baseline: Baseline, sensors: Set<Sensor>) -> InterferenceReport`  
+**Output:** `{ detected, interference_vector, source_estimate, confidence }`  
+**Priority:** P1 (High - Security)  
+**Implementation:** Planned
+
+#### Cognitive Dissonance Quantifier (Phase 3)
+**Abstract Phenomena:** Measures internal inconsistencies  
+**Input:** `(belief_system: BeliefSystem) -> DissonanceMetrics`  
+**Output:** `{ dissonance_score, contradictions, resolution_strategies }`  
+**Priority:** P2 (Medium)  
+**Implementation:** Planned
+
+### 3.4 Protocol Engineering
+
+#### Protocol Genome Analyzer (Phase 3)
+**Abstract Phenomena:** Decomposes protocols into genetic components  
+**Input:** `(protocol: Protocol) -> ProtocolGenome`  
+**Output:** `{ genes, gene_expression, regulatory_network, mutations }`  
+**Priority:** P2 (Medium)  
+**Implementation:** Planned
+
+#### Protocol Synthesis Engine (Phase 3)
+**Abstract Phenomena:** Generates new protocols from components  
+**Input:** `(gene_pool: Set<Gene>, constraints, objectives) -> SynthesizedProtocol`  
+**Output:** `{ protocol, genome, fitness, novelty }`  
+**Priority:** P1 (High)  
+**Implementation:** Planned
 
 ---
 
-## CATEGORY IX: META-TOOLING SYSTEMS
+## LAYER 4: META & EVOLUTION
 
-**Purpose:** Create, combine, and evolve tools themselves
+**Purpose:** Self-modification, tool generation, and autonomous evolution  
+**Phase:** 3 (Advanced)  
+**Dependencies:** All lower layers
 
-### IX.A: Tool Synthesizer
-**Abstract Phenomena:** Generates new tools from specifications and primitives
-**Input Signature:** `(specification: ToolSpecification, primitive_library: Set<Primitive>) -> Tool`
-**Output Signature:** `Tool { implementation: Code, interface: Interface, metadata: Metadata, validation_results: ValidationReport }`
+These tools enable the system to create and evolve its own capabilities.
+
+### 4.1 Tool Synthesis
+
+#### Tool Synthesizer ⭐ Phase 3 Critical
+**Abstract Phenomena:** Generates new tools from specifications  
+**Input:** `(specification: ToolSpecification, primitive_library: Set<Primitive>) -> Tool`  
+**Output:** `Tool { implementation, interface, metadata, validation_results }`  
 **Atomic Behaviors:**
 - Specification parsing
 - Primitive composition
 - Code generation
 - Automated testing
-**Concurrency Profile:** Parallel candidate generation
-**Reactivity Profile:** On-demand
 
-### IX.B: Tool Combinator
-**Abstract Phenomena:** Combines multiple tools into composite tools
-**Input Signature:** `(tools: Set<Tool>, composition_strategy: Strategy) -> CompositeTool`
-**Output Signature:** `CompositeTool { tool: Tool, composition_graph: Graph, performance_characteristics: PerformanceProfile }`
-**Atomic Behaviors:**
-- Interface matching
-- Dataflow orchestration
-- Performance modeling
-- Optimization
-**Concurrency Profile:** Parallel sub-tool execution
-**Reactivity Profile:** On-demand with optimization
+**Concurrency:** Parallel candidate generation  
+**Reactivity:** On-demand  
+**Priority:** P0 (Critical for Phase 3)  
+**Implementation:** Planned
 
-### IX.C: Tool Mutator
-**Abstract Phenomena:** Evolves existing tools through controlled mutations
-**Input Signature:** `(tool: Tool, mutation_budget: int, fitness_function: FitnessFunction) -> MutatedTool`
-**Output Signature:** `MutatedTool { tool: Tool, mutations: Set<Mutation>, fitness_delta: float }`
-**Atomic Behaviors:**
-- Mutation generation
-- Fitness evaluation
-- Selection
-- Validation
-**Concurrency Profile:** Parallel fitness evaluation
-**Reactivity Profile:** Background continuous evolution
+#### Tool Combinator (Phase 3)
+**Abstract Phenomena:** Combines multiple tools into composite tools  
+**Input:** `(tools: Set<Tool>, composition_strategy: Strategy) -> CompositeTool`  
+**Output:** `{ tool, composition_graph, performance_characteristics }`  
+**Priority:** P1 (High)  
+**Implementation:** Planned
 
-### IX.D: Tool Fitness Evaluator
-**Abstract Phenomena:** Assesses quality and effectiveness of tools
-**Input Signature:** `(tool: Tool, test_suite: TestSuite, metrics: Set<Metric>) -> FitnessReport`
-**Output Signature:** `FitnessReport { overall_fitness: float, metric_scores: Map<Metric, float>, failure_modes: Set<FailureMode> }`
-**Atomic Behaviors:**
-- Test execution
-- Metric calculation
-- Failure mode analysis
-- Comparative benchmarking
-**Concurrency Profile:** Parallel test execution
-**Reactivity Profile:** On-demand per-tool
+#### Tool Mutator (Phase 3)
+**Abstract Phenomena:** Evolves tools through controlled mutations  
+**Input:** `(tool: Tool, mutation_budget: int, fitness_function: FitnessFunction) -> MutatedTool`  
+**Output:** `{ tool, mutations, fitness_delta }`  
+**Priority:** P1 (High)  
+**Implementation:** Planned
 
-### IX.E: Tool Registry and Discovery Service
-**Abstract Phenomena:** Maintains catalog of available tools with discovery capabilities
-**Input Signature:** `(query: ToolQuery) -> Set<Tool>`
-**Output Signature:** `Set<Tool> { tools matching query, ranked by relevance }`
-**Atomic Behaviors:**
-- Tool indexing
-- Semantic search
-- Capability matching
-- Recommendation
-**Concurrency Profile:** Parallel index search
-**Reactivity Profile:** Real-time query response
+### 4.2 Tool Evaluation & Management
 
-### IX.F: Recursive Meta-Tool (Tool for Making Tool-Makers)
-**Abstract Phenomena:** Creates tools that create tools (higher-order tool synthesis)
-**Input Signature:** `(meta_specification: MetaToolSpec) -> ToolMaker`
-**Output Signature:** `ToolMaker { tool_synthesizer: Tool, capabilities: Set<Capability>, generation: int }`
-**Atomic Behaviors:**
-- Meta-specification interpretation
-- Higher-order code generation
-- Recursive capability bootstrapping
-- Generation tracking
-**Concurrency Profile:** Sequential with parallel validation
-**Reactivity Profile:** On-demand with memoization
+#### Tool Fitness Evaluator (Phase 3)
+**Abstract Phenomena:** Assesses quality and effectiveness of tools  
+**Input:** `(tool: Tool, test_suite: TestSuite, metrics: Set<Metric>) -> FitnessReport`  
+**Output:** `{ overall_fitness, metric_scores, failure_modes }`  
+**Priority:** P1 (High)  
+**Implementation:** Planned
+
+#### Recursive Meta-Tool (Phase 3)
+**Abstract Phenomena:** Creates tools that create tools  
+**Input:** `(meta_specification: MetaToolSpec) -> ToolMaker`  
+**Output:** `{ tool_synthesizer, capabilities, generation }`  
+**Priority:** P2 (Medium - Research)  
+**Implementation:** Planned
 
 ---
 
-## INTEGRATION ARCHITECTURE
+## IMPLEMENTATION STATUS MATRIX
 
-### VM Integration Points
+### Phase 1 (MVP) - Target: Months 1-6
 
-1. **Per-Cycle Hooks**
-   - Execute before/after each VM cycle
-   - Access: Read-only VM state
-   - Use case: Execution tracing, performance monitoring
+| Tool | Layer | Priority | Status | LOC | Test Coverage |
+|------|-------|----------|--------|-----|---------------|
+| Hook System | 0 | P0 | ✅ Complete | 350 | 85% |
+| Tool Registry | 0 | P0 | ✅ Complete | 400 | 90% |
+| Structural Memory Diff | 1 | P0 | ✅ Complete | 250 | 80% |
+| Execution Tracer | 1 | P0 | ✅ Complete | 280 | 75% |
+| Statistical Anomaly | 2 | P0 | ✅ Complete | 200 | 85% |
+| Pattern Prevalence | 2 | P1 | 🔨 In Progress | 150 | 60% |
+| Local Entropy | 2 | P1 | 📋 Planned | - | - |
+| Event Classifier | 1 | P1 | 📋 Planned | - | - |
 
-2. **Per-Event Hooks**
-   - Trigger on specific events (memory write, I/O, exceptions)
-   - Access: Event details, partial VM state
-   - Use case: Anomaly detection, logging
+**Phase 1 Progress:** 5/8 tools complete (62.5%)
 
-3. **Per-Snapshot Hooks**
-   - Execute at state snapshot boundaries
-   - Access: Full VM state snapshot
-   - Use case: Diff analysis, checkpoint validation
+### Phase 2 (Growth) - Target: Months 7-18
 
-### Kernel Integration Points
+| Category | Tools | Complete | In Progress | Planned |
+|----------|-------|----------|-------------|---------|
+| Memory Analysis | 3 | 0 | 0 | 3 |
+| Execution Analysis | 2 | 0 | 0 | 2 |
+| Temporal | 3 | 0 | 0 | 3 |
+| Detection | 4 | 0 | 0 | 4 |
+| Noetic | 2 | 0 | 0 | 2 |
+| Energy | 1 | 0 | 0 | 1 |
 
-1. **System Call Interception**
-   - Intercept and analyze system calls
-   - Capability: Modify, delay, or reject calls
+**Phase 2 Progress:** 0/15 tools started
 
-2. **Memory Management Hooks**
-   - Integration with allocator, GC, paging
-   - Capability: Track memory patterns, detect leaks
+### Phase 3 (Advanced) - Target: Months 19-36
 
-3. **Scheduler Hooks**
-   - Integration with task scheduler
-   - Capability: Analyze scheduling decisions, adjust priorities
+| Category | Tools | Status |
+|----------|-------|--------|
+| Complete Memory | 2 | Planned |
+| Complete Execution | 2 | Planned |
+| Advanced Temporal | 3 | Planned |
+| Complete Noetic | 3 | Planned |
+| Advanced Energy | 3 | Planned |
+| Protocol Engineering | 6 | Planned |
+| Meta-Tooling | 5 | Planned |
 
-4. **I/O Subsystem Hooks**
-   - Integration with I/O stack
-   - Capability: Monitor data flows, detect exfiltration
+**Phase 3 Progress:** 0/24 tools started
 
-### Tool Lifecycle Management
+---
 
-```
-Tool States:
-1. Dormant     - Registered but not active
-2. Initializing - Loading and preparing
-3. Active      - Running and processing
-4. Suspended   - Temporarily paused
-5. Terminated  - Cleanly shut down
+## INTEGRATION PATTERNS
 
-State Transitions:
-Dormant -> Initializing: attach()
-Initializing -> Active: ready()
-Active -> Suspended: suspend()
-Suspended -> Active: resume()
-Active -> Terminated: detach()
-Any -> Terminated: force_detach()
+### Layer 0 → Layer 1: Sensing
+```python
+# Hook system enables raw data collection
+hook_registry.vm_hooks.after_snapshot.register(
+    callback=memory_diff_analyzer.on_snapshot,
+    priority=50
+)
 ```
 
-### Dynamic Tool Loading
-
-- Tools are dynamically loadable modules
-- Hot-swappable without system restart
-- Version management and rollback
-- Dependency resolution
-
-### Tool Communication
-
-- Pub/sub event bus for tool coordination
-- Shared data structures (blackboard pattern)
-- Direct tool-to-tool RPC
-- Result aggregation and fusion
-
----
-
-## DEPLOYMENT AND OPERATION
-
-### Tool Configuration
-
-Each tool has a configuration schema:
-```yaml
-tool:
-  id: "memory-diff-analyzer-v1"
-  category: "memory-diff-analyzers"
-  enabled: true
-  priority: 5
-  resources:
-    max_memory_mb: 100
-    max_cpu_percent: 5
-  triggers:
-    - type: "per-snapshot"
-      frequency: "1/minute"
-  outputs:
-    - channel: "diff-analysis-stream"
-      format: "json"
+### Layer 1 → Layer 2: Analysis
+```python
+# Raw memory diffs feed into anomaly detection
+diff = structural_diff_analyzer.analyze(snapshot)
+anomaly_score = anomaly_detector.check_diff(diff)
 ```
 
-### Resource Management
+### Layer 2 → Layer 3: Cognition
+```python
+# Detected anomalies trigger predictive analysis
+if anomaly_score.is_anomaly:
+    futures = prophecy_engine.predict_consequences(
+        current_state=snapshot,
+        anomaly=anomaly_score
+    )
+```
 
-- Resource quotas per tool (CPU, memory, I/O)
-- Priority-based resource allocation
-- Graceful degradation under resource pressure
-- Tool hibernation for inactive tools
-
-### Monitoring and Observability
-
-- Per-tool performance metrics
-- Resource utilization dashboards
-- Anomaly detection on tool behavior
-- Distributed tracing for tool interactions
-
----
-
-## SECURITY AND SAFETY
-
-### Tool Isolation
-
-- Each tool runs in isolated sandbox
-- Capability-based security model
-- Minimal privilege principle
-- Mandatory access control
-
-### Validation and Verification
-
-- Formal specification of tool contracts
-- Automated property-based testing
-- Continuous validation of tool behavior
-- Circuit breakers for misbehaving tools
-
-### Defense in Depth
-
-- Multiple anomaly detectors with voting
-- Redundant threat detection
-- Layered defense architecture
-- Fail-safe defaults
+### Layer 3 → Layer 4: Evolution
+```python
+# Patterns inform tool synthesis
+if novel_pattern_detected:
+    new_tool = tool_synthesizer.create(
+        specification=derive_spec_from_pattern(pattern)
+    )
+    registry.register_tool(new_tool)
+```
 
 ---
 
-## EVOLUTIONARY CHARACTERISTICS
+## ARCHITECTURAL PRINCIPLES
 
-### Self-Improvement
+### 1. Layered Dependencies
+- Tools only depend on lower layers
+- No circular dependencies
+- Clear upgrade path (MVP → Growth → Advanced)
 
-- Tools measure their own effectiveness
-- Automatic parameter tuning
-- A/B testing of tool variants
-- Gradual rollout of improvements
+### 2. Interface Stability
+- Layer 0-1 interfaces locked in Phase 1
+- Layer 2-3 interfaces stabilize in Phase 2
+- Layer 4 designed for evolution
 
-### Adaptation
+### 3. Performance Isolation
+- Each layer has overhead budget
+- Layer 1: < 5% overhead
+- Layer 2: < 3% overhead
+- Layer 3: < 2% overhead
+- Layer 4: < 1% overhead (runs offline)
 
-- Online learning from operational data
-- Dynamic threshold adjustment
-- Context-aware behavior modification
-- Environmental adaptation
-
-### Mutation and Selection
-
-- Controlled tool mutation for exploration
-- Fitness-based selection of tool variants
-- Population-based tool evolution
-- Speciation into tool niches
+### 4. Graceful Degradation
+- System functional with only Layer 0-1
+- Layer 2 adds intelligence
+- Layer 3 adds prediction
+- Layer 4 adds evolution
 
 ---
 
-## SUMMARY STATISTICS
+## NEXT STEPS
 
-- **Total Tool Categories:** 9 (8 primary + 1 meta)
-- **Total Tool Types:** 47
-- **Integration Points:** 7 (VM + Kernel)
-- **Tool States:** 5
-- **State Transitions:** 6
+### Immediate (Week 1-2)
+1. Complete Pattern Prevalence Quantifier
+2. Implement Local Entropy Microscope
+3. Design Event Classifier interface
 
-This taxonomy provides a complete foundation for the Void-State system's internal nervous system and immune system, enabling comprehensive self-awareness, self-maintenance, and self-evolution.
+### Short-term (Month 1-3)
+1. Finish all Phase 1 tools
+2. Add comprehensive tests
+3. Performance optimization
+4. Documentation and examples
+
+### Medium-term (Month 4-6)
+1. Begin Phase 2 tools
+2. Add ML integration
+3. Build dashboard
+4. Pilot deployment
+
+This layered architecture provides clear separation of concerns while enabling a phased, capital-efficient implementation path.

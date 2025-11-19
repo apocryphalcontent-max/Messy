@@ -1,0 +1,74 @@
+{
+  "registry_config": {
+    "max_tools": 100,
+    "allow_dynamic_registration": true,
+    "require_authentication": false
+  },
+  
+  "phase1_tools": [
+    {
+      "tool_name": "structural_memory_diff",
+      "tool_category": "memory_diff_analyzers",
+      "enabled": true,
+      "priority": 100,
+      "resources": {
+        "max_memory_mb": 200,
+        "max_cpu_percent": 10
+      }
+    },
+    {
+      "tool_name": "statistical_anomaly_detector",
+      "tool_category": "anomaly_classifiers",
+      "enabled": true,
+      "priority": 90,
+      "resources": {
+        "max_memory_mb": 150,
+        "max_cpu_percent": 15
+      }
+    },
+    {
+      "tool_name": "execution_tracer",
+      "tool_category": "opcode_lineage_trackers",
+      "enabled": true,
+      "priority": 80,
+      "resources": {
+        "max_memory_mb": 300,
+        "max_cpu_percent": 20
+      }
+    }
+  ],
+  
+  "hook_config": {
+    "vm_hooks": {
+      "before_cycle": {
+        "enabled": true,
+        "overhead_budget_ns": 100
+      },
+      "after_cycle": {
+        "enabled": true,
+        "overhead_budget_ns": 100
+      },
+      "after_snapshot": {
+        "enabled": true,
+        "overhead_budget_ns": 10000
+      }
+    },
+    "kernel_hooks": {
+      "on_memory_allocation": {
+        "enabled": true,
+        "overhead_budget_ns": 500
+      },
+      "on_gc_cycle": {
+        "enabled": true,
+        "overhead_budget_ns": 5000
+      }
+    }
+  },
+  
+  "monitoring": {
+    "enabled": true,
+    "metrics_export_interval_seconds": 60,
+    "prometheus_port": 9090,
+    "grafana_dashboard": true
+  }
+}

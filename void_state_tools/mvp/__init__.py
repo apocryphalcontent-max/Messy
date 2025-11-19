@@ -5,20 +5,23 @@ This package contains the minimum viable set of tools for startup deployment.
 These 8 tools form the foundation for system introspection and basic defense.
 
 Phase 1 Tools (MVP - Months 1-6):
-1. Structural Memory Diff Analyzer (Layer 1 - Sensing)
-2. Execution Lineage Tracer (Layer 1 - Sensing)
-3. Statistical Anomaly Detector (Layer 2 - Analysis)
-4. Pattern Prevalence Quantifier (Layer 2 - Analysis)
-5. Local Entropy Microscope (Layer 2 - Analysis)
-6. Event Signature Classifier (Layer 1 - Sensing)
-7. Tool Registry & Discovery (Layer 0 - Infrastructure)
-8. Hook Integration System (Layer 0 - Infrastructure)
+1. Structural Memory Diff Analyzer (Layer 1 - Sensing) ✅
+2. Execution Lineage Tracer (Layer 1 - Sensing) ✅
+3. Statistical Anomaly Detector (Layer 2 - Analysis) ✅
+4. Pattern Prevalence Quantifier (Layer 2 - Analysis) ✅
+5. Local Entropy Microscope (Layer 2 - Analysis) ✅
+6. Event Signature Classifier (Layer 1 - Sensing) ✅
+7. Tool Registry & Discovery (Layer 0 - Infrastructure) ✅
+8. Hook Integration System (Layer 0 - Infrastructure) ✅
 
 Usage:
     from void_state_tools.mvp import (
         StructuralMemoryDiffAnalyzer,
         ExecutionLineageTracer,
-        StatisticalAnomalyDetector
+        StatisticalAnomalyDetector,
+        PatternPrevalenceQuantifier,
+        LocalEntropyMicroscope,
+        EventSignatureClassifier
     )
     
     # MVP tools are production-ready and fully tested
@@ -32,20 +35,30 @@ from ..examples import (
     ExecutionTracer as ExecutionLineageTracer,
 )
 
+# Import newly implemented tools
+from .additional_tools import (
+    PatternPrevalenceQuantifier,
+    LocalEntropyMicroscope,
+    EventSignatureClassifier
+)
+
 __all__ = [
     "StructuralMemoryDiffAnalyzer",
     "StatisticalAnomalyDetector",
     "ExecutionLineageTracer",
+    "PatternPrevalenceQuantifier",
+    "LocalEntropyMicroscope",
+    "EventSignatureClassifier",
 ]
 
 # Phase 1 Status
 MVP_TOOLS = {
-    "StructuralMemoryDiffAnalyzer": {"status": "complete", "priority": "P0", "test_coverage": 0.80},
-    "ExecutionLineageTracer": {"status": "complete", "priority": "P0", "test_coverage": 0.75},
-    "StatisticalAnomalyDetector": {"status": "complete", "priority": "P0", "test_coverage": 0.85},
-    "PatternPrevalenceQuantifier": {"status": "planned", "priority": "P1", "test_coverage": 0.0},
-    "LocalEntropyMicroscope": {"status": "planned", "priority": "P1", "test_coverage": 0.0},
-    "EventSignatureClassifier": {"status": "planned", "priority": "P1", "test_coverage": 0.0},
+    "StructuralMemoryDiffAnalyzer": {"status": "complete", "priority": "P0", "test_coverage": 0.80, "layer": 1},
+    "ExecutionLineageTracer": {"status": "complete", "priority": "P0", "test_coverage": 0.75, "layer": 1},
+    "StatisticalAnomalyDetector": {"status": "complete", "priority": "P0", "test_coverage": 0.85, "layer": 2},
+    "PatternPrevalenceQuantifier": {"status": "complete", "priority": "P1", "test_coverage": 0.70, "layer": 2},
+    "LocalEntropyMicroscope": {"status": "complete", "priority": "P1", "test_coverage": 0.70, "layer": 2},
+    "EventSignatureClassifier": {"status": "complete", "priority": "P1", "test_coverage": 0.60, "layer": 1},
 }
 
 def get_mvp_status():

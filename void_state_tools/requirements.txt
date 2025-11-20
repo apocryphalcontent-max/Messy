@@ -1,6 +1,6 @@
 # Void-State Tools Requirements
 # Core dependencies for the proprietary tools system
-# Version: 3.1.0
+# Version: 3.3.0 "Synthesis"
 
 # Numerical computing (required)
 numpy>=2.0.0

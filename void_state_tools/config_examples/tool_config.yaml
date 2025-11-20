@@ -1,0 +1,72 @@
+# Example Tool Configuration
+# Void-State Proprietary Tools System
+
+# Basic tool configuration
+basic_config:
+  tool_name: "memory_analyzer"
+  tool_category: "memory_diff_analyzers"
+  enabled: true
+  auto_start: true
+  priority: 50
+
+# Resource limits
+resources:
+  max_memory_mb: 200
+  max_cpu_percent: 15
+  max_io_ops_per_second: 1000
+  max_threads: 2
+  overhead_budget_ns: 1000
+
+# Hook attachments
+hooks:
+  vm:
+    - name: "vm.after_snapshot"
+      priority: 50
+      filter:
+        type: "frequency"
+        sample_rate: 1.0
+    - name: "vm.before_cycle"
+      priority: 10
+      filter:
+        type: "conditional"
+        condition: "cycle_count % 100 == 0"
+  
+  kernel:
+    - name: "kernel.on_memory_allocation"
+      priority: 100
+      filter:
+        type: "time_window"
+        start_time: 0
+        end_time: 3600
+
+# Logging and monitoring
+monitoring:
+  metrics_enabled: true
+  metrics_interval_seconds: 60
+  log_level: "INFO"
+  error_threshold: 10
+  circuit_breaker:
+    enabled: true
+    failure_threshold: 5
+    timeout_seconds: 30
+
+# Tool-specific configuration
+tool_specific:
+  memory_diff:
+    track_structural: true
+    track_semantic: false
+    track_temporal: false
+    snapshot_retention: 100
+    diff_algorithm: "myers"
+  
+  anomaly_detector:
+    method: "isolation_forest"
+    contamination: 0.1
+    n_estimators: 100
+    threshold_stddev: 3.0
+  
+  execution_tracer:
+    max_stack_depth: 50
+    trace_memory: true
+    trace_registers: false
+    sampling_rate: 0.1

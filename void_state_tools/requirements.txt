@@ -1,9 +1,11 @@
 # Void-State Tools Requirements
 # Core dependencies for the proprietary tools system
+# Version: 3.1.0
 
-# Numerical computing
+# Numerical computing (required)
 numpy>=2.0.0
 scipy>=1.10.0
+networkx>=2.8.0
 
 # Optional dependencies for advanced features
 # Uncomment as needed:
